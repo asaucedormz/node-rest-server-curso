@@ -20,7 +20,8 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 
-app.use(require('./routes/usuario'));
+app.use(require('./routes/index'));
+
 
 
 
