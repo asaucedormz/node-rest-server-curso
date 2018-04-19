@@ -45,7 +45,7 @@ let usuarioSchema = new Schema({
 });
 
 
-usuarioSchema.methods.toJSON = function () {
+usuarioSchema.methods.toJSON = function() {
 
     let user = this;
     let userObject = user.toObject();
@@ -55,9 +55,7 @@ usuarioSchema.methods.toJSON = function () {
 }
 
 
-usuarioSchema.plugin(uniqueValidator, {
-    message: '{PATH} debe de ser único'
-});
+usuarioSchema.plugin(uniqueValidator, { message: '{PATH} debe de ser único' });
 
 
 module.exports = mongoose.model('Usuario', usuarioSchema);

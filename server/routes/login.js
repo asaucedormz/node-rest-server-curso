@@ -3,9 +3,7 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const {
-    OAuth2Client
-} = require('google-auth-library');
+const { OAuth2Client } = require('google-auth-library');
 const client = new OAuth2Client(process.env.CLIENT_ID);
 
 
@@ -20,9 +18,7 @@ app.post('/login', (req, res) => {
 
     let body = req.body;
 
-    Usuario.findOne({
-        email: body.email
-    }, (err, usuarioDB) => {
+    Usuario.findOne({ email: body.email }, (err, usuarioDB) => {
 
         if (err) {
             return res.status(500).json({
@@ -52,9 +48,7 @@ app.post('/login', (req, res) => {
 
         let token = jwt.sign({
             usuario: usuarioDB
-        }, process.env.SEED, {
-            expiresIn: process.env.CADUCIDAD_TOKEN
-        });
+        }, process.env.SEED, { expiresIn: process.env.CADUCIDAD_TOKEN });
 
         res.json({
             ok: true,
@@ -88,7 +82,7 @@ async function verify(token) {
 }
 
 
-app.post('/google', async (req, res) => {
+app.post('/google', async(req, res) => {
 
     let token = req.body.idtoken;
 
@@ -101,9 +95,7 @@ app.post('/google', async (req, res) => {
         });
 
 
-    Usuario.findOne({
-        email: googleUser.email
-    }, (err, usuarioDB) => {
+    Usuario.findOne({ email: googleUser.email }, (err, usuarioDB) => {
 
         if (err) {
             return res.status(500).json({
@@ -124,9 +116,7 @@ app.post('/google', async (req, res) => {
             } else {
                 let token = jwt.sign({
                     usuario: usuarioDB
-                }, process.env.SEED, {
-                    expiresIn: process.env.CADUCIDAD_TOKEN
-                });
+                }, process.env.SEED, { expiresIn: process.env.CADUCIDAD_TOKEN });
 
 
                 return res.json({
@@ -158,9 +148,7 @@ app.post('/google', async (req, res) => {
 
                 let token = jwt.sign({
                     usuario: usuarioDB
-                }, process.env.SEED, {
-                    expiresIn: process.env.CADUCIDAD_TOKEN
-                });
+                }, process.env.SEED, { expiresIn: process.env.CADUCIDAD_TOKEN });
 
 
                 return res.json({
